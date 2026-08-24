@@ -1,12 +1,7 @@
 import axios from 'axios'
 
-let baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5050/api'
-if (baseURL && !baseURL.endsWith('/api') && !baseURL.endsWith('/api/')) {
-  baseURL = baseURL.endsWith('/') ? `${baseURL}api` : `${baseURL}/api`
-}
-
 const API = axios.create({
-  baseURL,
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5050/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
