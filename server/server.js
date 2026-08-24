@@ -30,9 +30,14 @@ const app = express()
 app.use(helmet())
 
 const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:5173',
-  'http://localhost:5174'
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://expense-manager-one-rust.vercel.app'
 ]
+
+if (process.env.CLIENT_URL) {
+  allowedOrigins.push(...process.env.CLIENT_URL.split(',').map(o => o.trim()))
+}
 
 app.use(cors({
   origin: (origin, callback) => {
